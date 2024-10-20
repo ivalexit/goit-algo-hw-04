@@ -71,3 +71,21 @@ class Benchmark:  # Class for testing and time measuring
     
     def _benchmark(self, sort_func, data):
         return timeit.timeit(lambda: sort_func(data.copy()), number=10)
+    
+    def plot_results(self):
+        sizes = self.results['sizes']
+        merge_times = self.results['merge_sort']
+        insertion_times = self.results['insertion_sort']
+        timsort_times = self.results['timsort']
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(sizes, merge_times, label='Merge Sort', marker='o')
+        plt.plot(sizes, insertion_times, label='Insertion Sort', marker='o')
+        plt.plot(sizes, timsort_times, label='Timsort', marker='o')
+
+        plt.xlabel('Array size')
+        plt.ylabel('Execution time (sec)')
+        plt.title('Comparing of algorithm execution time')
+        plt.legend()
+        plt.grid(True)
+        plt.show()
