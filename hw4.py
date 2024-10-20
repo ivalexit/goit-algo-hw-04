@@ -25,4 +25,39 @@ class SortIt:  # Class for comparing of 3 sorting types
         result.extend(right[j:])
         return result
     
-    def insertion_sort()
+    def insertion_sort(self, arr):
+        for i in range(1, len(arr)):
+            key = arr[i]
+            j = i - 1
+            while j >= 0 and key < arr[j]:
+                arr[j + 1] = arr[j]
+                j -= 1
+            arr[j + 1] = key
+        return arr
+    
+    def timsort(self, arr):  
+        return sorted(arr)  #  built in combined sorting method 
+    
+class Benchmark:  # Class for testing and time measuring 
+
+    def __init__(self, sorter):
+        self.sorter = sorter
+        self.results = {
+            'sizes': [],
+            'merge_sort': [],
+            'timsort': []
+        }
+
+    def run(self, sizes):  # Starts comparing
+        for size in sizes:
+            data = self._generate_data(size)
+            print(f"\nTest for the array size {size}")
+            self.results['sizes'].append(size)
+
+            merge_time = self._benchmark(self.sorter.merge_sort, data)
+            insertion_time = self._benchmark(self.sorter.insertion_sort, data)
+            timsort_time = self._benchmark(self.sorter.timsort, data)
+
+            self.results['merge_sort'].append(merge_time)
+            self.results['insertion_sort'].append(insertion_time)
+            self.results['timsort'].append(timsort_time)
