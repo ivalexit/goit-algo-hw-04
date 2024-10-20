@@ -2,7 +2,7 @@ import random
 import timeit
 import matplotlib.pyplot as plt
 
-class SortIt:  # Class for comparing of 3 sorting types
+class Sorter:  # Class for comparing of 3 sorting types
     def merge_sort(self, arr):
         if len(arr) < 2:
             return arr   # Base case of recursion
@@ -61,3 +61,13 @@ class Benchmark:  # Class for testing and time measuring
             self.results['merge_sort'].append(merge_time)
             self.results['insertion_sort'].append(insertion_time)
             self.results['timsort'].append(timsort_time)
+
+            print(f"Time for merge sort: {merge_time:.6f} sec.")
+            print(f"Time for insertion sort: {insertion_time:.6f} sec.")
+            print(f"Time for Timsort: {timsort_time:.6f} sec.")
+
+    def _generate_data(self, size):
+        return [random.randint(0, size * 10) for _ in range(size)]
+    
+    def _benchmark(self, sort_func, data):
+        return timeit.timeit(lambda: sort_func(data.copy()), number=10)
