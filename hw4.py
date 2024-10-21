@@ -45,6 +45,7 @@ class Benchmark:  # Class for testing and time measuring
         self.results = {
             'sizes': [],
             'merge_sort': [],
+            'insertion_sort': [],  # Add insertion_sort results
             'timsort': []
         }
 
@@ -96,7 +97,8 @@ def main():
     sizes = [10, 100, 1000, 10000]
 
     print('Comparing of algorithm sorting types:\n')
-    benchmark.plot_results()
+    benchmark.run(sizes)  # Run tests before plotting
+    benchmark.plot_results()  # Plot after tests
 
 if __name__ == "__main__":
     main()
